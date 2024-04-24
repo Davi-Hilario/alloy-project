@@ -1,0 +1,57 @@
+.search-bar {
+    width: 30%;
+    height: 50%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    border: 1px solid #33335F;
+    border-radius: 2rem;
+}
+
+.search-input {
+    width: 80%;
+    height: 90%;
+    padding-left: 10px;
+    border-radius: 2rem;
+    border: none;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.icon-area {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #33335F;
+    border-radius: 2rem 0 0 2rem;
+}
+
+.icon {
+    height: 20px;
+    filter: invert();
+    cursor: pointer;
+}
+
+.card-area {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    justify-content: center;
+    align-content: center;
+}
+
+.products-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: red;
+}
