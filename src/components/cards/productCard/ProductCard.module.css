@@ -63,15 +63,10 @@
     height: 2rem;
     border-radius: 50%;
     border: none;
+    background-color: transparent;
     background-image: url("../../../utils/assets/icons/shopping-cart.png");
     background-position: center;
     background-size: 70%;
     background-repeat: no-repeat;
     cursor: pointer;
-    transition: .5s ease;
-}
-
-.shopping-cart-btn:hover {
-    transition: .5s;
-    background-color: rgb(175, 175, 175);
 }
