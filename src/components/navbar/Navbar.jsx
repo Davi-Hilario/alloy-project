@@ -2,13 +2,15 @@ import style from './Navbar.module.css';
 import Button from '../buttons/Buttons';
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar () {
 
     const [isLogado, setLogado] = useState(false);
+    const navigate = useNavigate();
 
     let login = () => {
-        setLogado(true);
+        navigate("/login")
     };
 
     let leave = () => {
@@ -16,7 +18,7 @@ function Navbar () {
     };
 
     let register = () => {
-        console.log("Register");
+        navigate("/register")
     };
 
     let account = () => {

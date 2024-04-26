@@ -1,0 +1,23 @@
+.input-line {
+    display: flex;
+    height: 30%;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.input-label {
+    font-weight: bold;
+}
+
+.input-field {
+    height: 40%;
+    border-radius: .5rem;
+    border: none;
+    padding-left: .7rem;
+    transition: .5s;
+}
+
+.input-field:hover {
+    transition: .5s;
+    box-shadow: .2rem .5rem .7rem rgb(209, 209, 209);
+}
