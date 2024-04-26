@@ -1,6 +1,7 @@
 import style from './Login.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usersController as api } from '../../api/api';
 import Form from '../../components/form/Form';
 import FormInput from '../../components/inputs/formInput/FormInput';
 
@@ -11,8 +12,17 @@ function Login() {
     const navigate = useNavigate();
 
     function handleSubmit () {
-        console.log("Login: " + loginValue);
-        console.log("Password: " + passwordValue);
+        api.get(null, {
+            params: {
+                email: loginValue,
+                password: passwordValue
+            }
+        }).then(response => {
+            sessionStorage.TOKEN = new Date().toISOString();
+            navigate("/");
+        }).catch(err => {
+            alert("The provided email AND/OR password are incorrect!")
+        })
     }
 
     return (

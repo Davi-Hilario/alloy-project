@@ -1,7 +1,14 @@
 import axios from "axios";
 
-const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL
+const productsController = axios.create({
+    baseURL: process.env.REACT_APP_API_URL + "/products",
 })
 
-export default api;
+const usersController = axios.create({
+    baseURL: process.env.REACT_APP_API_URL + "/users",
+})
+
+export {
+    productsController,
+    usersController
+};

@@ -1,18 +1,15 @@
 import style from './Home.module.css';
 import SearchBar from '../../components/searchbar/SearchBar';
 import Navbar from '../../components/navbar/Navbar';
-import api from '../../api/api';
+import { productsController as api } from '../../api/api';
 import { useState, useEffect } from 'react';
 import ProductCard from '../../components/cards/productCard/ProductCard';
-import { useNavigate } from 'react-router-dom';
 
 function App() {
 
   let [searchValue, setSearchValue] = useState("");
   let [products, setProducts] = useState([]); 
   let [foundProducts, setFoundProducts] = useState([]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     findAllProducts()
@@ -46,10 +43,6 @@ function App() {
       setFoundProducts([]);
     }
   };
-
-  function login () {
-    navigate("/login");
-  }
 
   return (
     <div className={style["App"]}>
