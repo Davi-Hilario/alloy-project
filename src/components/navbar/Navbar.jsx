@@ -1,28 +1,35 @@
 import style from './Navbar.module.css';
 import Button from '../buttons/Buttons';
 
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import doesTokenExists from '../../validateAuthentication';
+import { useEffect, useState } from 'react';
 
 function Navbar () {
 
-    const [isLogado, setLogado] = useState(false);
     const navigate = useNavigate();
+    let [isLogged, setLogged] = useState(false);
+
+    useEffect(() => {
+        setLogged(doesTokenExists());
+    }, [])
 
     let login = () => {
         navigate("/login")
     };
 
     let leave = () => {
-        setLogado(false);
+        sessionStorage.clear();
+        alert("Bye ;)")
+        window.location.reload();
     };
 
     let register = () => {
         navigate("/register")
     };
 
-    let account = () => {
-        console.log("Your account");
+    let cart = () => {
+      console.log("cart")  
     };
 
     return (
@@ -30,7 +37,7 @@ function Navbar () {
             <div className={style["container"]}>
                 <img alt="React icon" className={style["react-logo-icon"]} />
                 <div className={style["btn-area"]}>
-                    {!isLogado && (
+                    {!isLogged && (
                         <>
                             <Button 
                                 value={"Login"}
@@ -42,12 +49,12 @@ function Navbar () {
                             />
                         </>
                     )}
-                    {isLogado && (
+                    {isLogged && (
                         <>
-                            <Button 
-                                value={"Account"}
-                                onClick={account}
-                            />
+                            <button 
+                                className={style['shopping-cart-btn']} 
+                                onClick={cart}
+                            ></button> 
                             <Button 
                                 value={"Leave"}
                                 onClick={leave}
