@@ -1,9 +1,8 @@
-import style from './Login.module.css'
-import Button from '../../components/buttons/Buttons';
-import FormInput from '../../components/inputs/formInput/FormInput';
+import style from './Login.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import Form from '../../components/form/Form';
+import FormInput from '../../components/inputs/formInput/FormInput';
 
 function Login() {
 
@@ -11,7 +10,7 @@ function Login() {
     let [passwordValue, setPasswordValue] = useState("");
     const navigate = useNavigate();
 
-    function handleLogin () {
+    function handleSubmit () {
         console.log("Login: " + loginValue);
         console.log("Password: " + passwordValue);
     }
@@ -19,13 +18,15 @@ function Login() {
     return (
         <div className={style["Login"]}>
             <div className={style["container"]}>
-                <div className={style["form"]}>
-                    <div className={style["form-header"]}>
-                        <button onClick={() => navigate("/")}></button>
-                        <h1>LOGIN</h1>
-                        <p></p>
-                    </div>
-                    <div className={style["form-body"]}>
+                <Form
+                    goBack={() => navigate("/")}
+                    changeForm={() => navigate("/register")}
+                    title="LOGIN"
+                    onClickSubmit={handleSubmit}
+                    buttonValue="Login"
+                    subText="Not registered yet? "
+                    subTextLink="Create your account"
+                    formInput={[
                         <FormInput 
                             fieldName="Email"
                             height="45%"
@@ -33,7 +34,7 @@ function Login() {
                             onChange={(e) => {
                                 setLoginValue(e.target.value)
                             }}
-                        />
+                        />,
                         <FormInput
                             fieldName="Password"
                             height="45%"
@@ -42,19 +43,8 @@ function Login() {
                                 setPasswordValue(e.target.value)
                             }}
                         />
-                    </div>
-                    <div className={style["form-footer"]}>
-                        <Button 
-                            value="Login"
-                            height="3.5rem"
-                            width="50%"
-                            fontSize="20px"
-                            onClick={handleLogin}
-                        />
-                        <p>Not registered yet? <b onClick={() => navigate("/register")} className={style["create-account"]}>Create your account</b></p>
-                    </div>
-                </div>
-                
+                    ]}
+                />
             </div>
         </div>
     );
