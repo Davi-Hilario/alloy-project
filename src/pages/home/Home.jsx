@@ -4,8 +4,13 @@ import Navbar from '../../components/navbar/Navbar';
 import { productsController as api } from '../../api/api';
 import { useState, useEffect } from 'react';
 import ProductCard from '../../components/cards/productCard/ProductCard';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../redux/slices/cartSlice';
+import { addAllProducts, toggleAddToCart } from '../../redux/slices/productsSlice';
 
-function App() {
+function Home() {
+
+  const dispatch = useDispatch();
 
   let [searchValue, setSearchValue] = useState("");
   let [products, setProducts] = useState([]); 
@@ -22,7 +27,10 @@ function App() {
   function findAllProducts() {
     api.get().then((response) => {
       const { data } = response;
+      data.inCart = false;
+      console.log(data)
       setProducts(data);
+      dispatch(addAllProducts(products));
     }).catch((error) => {
       console.warn("Error: " + error);
     })
@@ -70,10 +78,13 @@ function App() {
               className={style['products-area']}
           >
               <ProductCard 
+                  id={data.id}
                   title={data.name}
                   description={data.description}
                   price={data.price}
                   src={data.image}
+                  addToCart={() => dispatch(addItemToCart(data))}
+                  inCart={false}
               />
           </div>
         ))}
@@ -83,4 +94,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

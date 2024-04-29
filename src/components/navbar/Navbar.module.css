@@ -28,11 +28,21 @@
     justify-content: center;
 }
 
-.btn-area .span {
-    width: 40px;
-    height: 35px;
+.btn-area span {
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    border: none;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5px;
+    color: white;
+    font-weight: bold;
+    background-color: #464682;
+    margin-top: -1.1rem;
+    margin-left: -.45rem;
 }
 
 .shopping-cart-btn {

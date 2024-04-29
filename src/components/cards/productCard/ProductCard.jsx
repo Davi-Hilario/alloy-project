@@ -1,9 +1,13 @@
 import style from './ProductCard.module.css';
 import PropTypes from 'prop-types';
 import Button from '../../buttons/Buttons';
-import cart from '../../../utils/assets/icons/shopping-cart.png'
+import { useDispatch } from 'react-redux';
+import { toggleAddToCart } from '../../../redux/slices/productsSlice';
 
-function ProductCard ({ src, title, description, price }) {
+function ProductCard ({ id, src, title, description, price, addToCart, inCart }) {
+
+    const dispatch = useDispatch();
+
     return (
         <div className={style["card"]}>
             <div className={style["container"]}>
@@ -13,10 +17,16 @@ function ProductCard ({ src, title, description, price }) {
                 <h2 className={style['card-title']}>{title}</h2>
                 <p className={style['card-desc']}>{description}</p>
                 <div className={style["price-line"]}>
-                    <h4>Price: </h4><p>${price}</p>
+                    <div className={style["price"]}><h4>Price: </h4><p>${price}</p></div>
+                    <span style={{display: inCart ? "block" : "none"}}>Added to Cart</span>
                 </div>
                 <div className={style["btn-area"]}>
-                    <button className={style['shopping-cart-btn']}></button>
+                    <button 
+                        className={style['shopping-cart-btn']}
+                        onClick={()=> {
+                            dispatch(toggleAddToCart({id: id, inCart: !inCart}))
+                        }}
+                    ></button>
                     <Button 
                         onClick={() => {console.log('Buy');}}
                         value="See more"

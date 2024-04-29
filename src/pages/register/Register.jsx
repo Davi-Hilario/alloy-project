@@ -33,6 +33,7 @@ function Register() {
             <div className={style["container"]}>
                 <Form
                     title="REGISTER"
+                    formHeight="35rem"
                     goBack={() => navigate("/")}
                     changeForm={() => navigate("/login")}
                     onClickSubmit={handleSubmit}

@@ -4,7 +4,7 @@ import Button from '../buttons/Buttons';
 
 function Form (props) {
     return (
-        <div className={style["form"]}>
+        <div className={style["Form"]} style={{height: props.formHeight}}>
             <div className={style["form-header"]}>
                 <button onClick={props.goBack}></button>
                 <h1>{props.title}</h1>

@@ -46,9 +46,17 @@
 .price-line {
     display: flex;
     align-items: center;
-    gap: 10px;
-    align-self: flex-start;
+    justify-content: space-between;
     height: 10%;
+    width: 100%;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    width: 41%;
+    height: auto;
+    justify-content: space-between;
 }
 
 .btn-area {

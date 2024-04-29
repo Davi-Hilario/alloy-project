@@ -4,10 +4,13 @@ import Button from '../buttons/Buttons';
 import { useNavigate } from 'react-router-dom';
 import doesTokenExists from '../../validateAuthentication';
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function Navbar () {
+function Navbar ({ cartItemsLength }) {
 
     const navigate = useNavigate();
+    const cart = useSelector((state) => state.cart);
     let [isLogged, setLogged] = useState(false);
 
     useEffect(() => {
@@ -28,8 +31,8 @@ function Navbar () {
         navigate("/register")
     };
 
-    let cart = () => {
-      console.log("cart")  
+    let cartIcon = () => {
+      console.log(cartItemsLength)  
     };
 
     return (
@@ -51,10 +54,14 @@ function Navbar () {
                     )}
                     {isLogged && (
                         <>
-                            <button 
-                                className={style['shopping-cart-btn']} 
-                                onClick={cart}
-                            ></button> 
+                            <div className={style['cart-button-area']}>
+                                <button 
+                                    className={style['shopping-cart-btn']} 
+                                    onClick={cartIcon}
+                                ></button> 
+                                <span>{cart.length}</span>
+                            </div>
+                            
                             <Button 
                                 value={"Leave"}
                                 onClick={leave}
@@ -66,6 +73,5 @@ function Navbar () {
         </div>
     );
 }
-
 
 export default Navbar;
