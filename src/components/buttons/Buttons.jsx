@@ -8,7 +8,8 @@ function Button (props) {
             style={{
                 width: props.width,
                 height: props.height,
-                fontSize: props.fontSize
+                fontSize: props.fontSize,
+                backgroundColor: props.backgroundColor
             }}
         >
             {props.value}

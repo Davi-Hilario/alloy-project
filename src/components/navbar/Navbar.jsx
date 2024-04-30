@@ -6,7 +6,7 @@ import doesTokenExists from '../../validateAuthentication';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-function Navbar ({ cartItemsLength }) {
+function Navbar () {
 
     const navigate = useNavigate();
     const cart = useSelector((state) => state.cart);
@@ -31,13 +31,13 @@ function Navbar ({ cartItemsLength }) {
     };
 
     let cartIcon = () => {
-      console.log(cartItemsLength)  
+        navigate("/cart")
     };
 
     return (
         <div className={style["navbar"]}>
             <div className={style["container"]}>
-                <img alt="React icon" className={style["react-logo-icon"]} />
+                <img alt="React icon" className={style["logo-icon"]} />
                 <div className={style["btn-area"]}>
                     {!isLogged && (
                         <>

@@ -1,0 +1,26 @@
+.found-items-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+  
+.found-items-area::after {
+    content: '';
+    height: 2rem;
+    flex-basis: 100%;
+}
+  
+.found-items-area::before {
+    content: '';
+    height: 1rem;
+    flex-basis: 100%;
+}
+  
+.products-area {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+    margin: 0 0 3rem .4rem;
+}

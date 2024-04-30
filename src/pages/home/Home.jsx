@@ -4,10 +4,9 @@ import Navbar from '../../components/navbar/Navbar';
 import { productsController as api } from '../../api/api';
 import { useState, useEffect } from 'react';
 import ProductCard from '../../components/cards/productCard/ProductCard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, removeItemFromCart } from '../../redux/slices/cartSlice';
 import { addAllProducts, toggleAddToCart } from '../../redux/slices/productsSlice';
-import { useSelector } from 'react-redux';
 
 function Home() {
 

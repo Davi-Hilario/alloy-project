@@ -1,12 +1,22 @@
 import style from './ProductCard.module.css';
-import PropTypes from 'prop-types';
 import Button from '../../buttons/Buttons';
-import { useDispatch } from 'react-redux';
-import { toggleAddToCart } from '../../../redux/slices/productsSlice';
+import doesTokenExists from '../../../validateAuthentication';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function ProductCard ({ src, title, description, price, addToCart, inCart }) {
 
-    const dispatch = useDispatch();
+    let [isLogged, setLogged] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setLogged(doesTokenExists());
+    }, [])
+
+    function sendToLoginPage() {
+        alert("You must log-in before adding products to your cart!")
+        navigate("/login")
+    }
 
     return (
         <div className={style["card"]}>
@@ -21,10 +31,19 @@ function ProductCard ({ src, title, description, price, addToCart, inCart }) {
                     <span style={{display: inCart ? "block" : "none"}}>Added to Cart</span>
                 </div>
                 <div className={style["btn-area"]}>
-                    <button 
-                        className={style['shopping-cart-btn']}
-                        onClick={addToCart}
-                    ></button>
+                    { !inCart && 
+                        <button 
+                            className={style['shopping-cart-btn']}
+                            onClick={() => isLogged ? addToCart() : sendToLoginPage()}
+                        ></button>
+                    }
+                    { inCart && 
+                       <Button 
+                            onClick={addToCart}
+                            value="Remove"
+                            backgroundColor="red"
+                        />
+                    }
                     <Button 
                         onClick={() => {console.log('Buy');}}
                         value="See more"
@@ -35,17 +54,4 @@ function ProductCard ({ src, title, description, price, addToCart, inCart }) {
     );
 }
 
-ProductCard.propTypes = {
-    src: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-}
-
-ProductCard.defaultProps = {
-    src: "",
-    title: "-",
-    description: "-",
-    price: 0,
-}
 export default ProductCard;

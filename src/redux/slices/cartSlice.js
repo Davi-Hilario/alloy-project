@@ -10,7 +10,8 @@ const cartSlice = createSlice({
                 name: action.payload.name,
                 price: action.payload.price,
                 description: action.payload.description,
-                image: action.payload.image
+                image: action.payload.image,
+                inCart: true,
             };
             state.push(newCartItem);
         },
