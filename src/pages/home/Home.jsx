@@ -5,32 +5,37 @@ import { productsController as api } from '../../api/api';
 import { useState, useEffect } from 'react';
 import ProductCard from '../../components/cards/productCard/ProductCard';
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../../redux/slices/cartSlice';
+import { addItemToCart, removeItemFromCart } from '../../redux/slices/cartSlice';
 import { addAllProducts, toggleAddToCart } from '../../redux/slices/productsSlice';
+import { useSelector } from 'react-redux';
 
 function Home() {
 
   const dispatch = useDispatch();
+  const allProducts = useSelector((state) => state.products)
 
   let [searchValue, setSearchValue] = useState("");
   let [products, setProducts] = useState([]); 
   let [foundProducts, setFoundProducts] = useState([]);
 
   useEffect(() => {
-    findAllProducts()
+    findAllProducts();
   }, [])
 
   useEffect(() => {
+    products.forEach(product => {
+      dispatch(addAllProducts(product));
+    });
+  }, [products])
+
+  useEffect(() => {
       searchProduct();
-  }, [searchValue])
+  }, [searchValue, allProducts])
 
   function findAllProducts() {
     api.get().then((response) => {
       const { data } = response;
-      data.inCart = false;
-      console.log(data)
       setProducts(data);
-      dispatch(addAllProducts(products));
     }).catch((error) => {
       console.warn("Error: " + error);
     })
@@ -41,9 +46,9 @@ function Home() {
 
       let searchResult = []
 
-      for (var i = 0; i < products.length; i++) {
-        if (products[i].name.toUpperCase().includes(searchValue.toUpperCase())) {
-          searchResult.push(products[i]);
+      for (var i = 0; i < allProducts.length; i++) {
+        if (allProducts[i].name.toUpperCase().includes(searchValue.toUpperCase())) {
+          searchResult.push(allProducts[i]);
         }
       }
       setFoundProducts(searchResult);
@@ -83,8 +88,17 @@ function Home() {
                   description={data.description}
                   price={data.price}
                   src={data.image}
-                  addToCart={() => dispatch(addItemToCart(data))}
-                  inCart={false}
+                  addToCart={() => {
+                    dispatch(toggleAddToCart({ id: data.id, inCart: !data.inCart }))
+
+                    if (!data.inCart) {
+                      dispatch(addItemToCart(data))
+                    } else {
+                      dispatch(removeItemFromCart({ id: data.id }))
+                    }
+
+                  }}
+                  inCart={data.inCart}
               />
           </div>
         ))}

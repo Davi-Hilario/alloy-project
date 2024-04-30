@@ -4,7 +4,6 @@ import Button from '../buttons/Buttons';
 import { useNavigate } from 'react-router-dom';
 import doesTokenExists from '../../validateAuthentication';
 import { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 function Navbar ({ cartItemsLength }) {

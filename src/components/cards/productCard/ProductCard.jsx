@@ -4,7 +4,7 @@ import Button from '../../buttons/Buttons';
 import { useDispatch } from 'react-redux';
 import { toggleAddToCart } from '../../../redux/slices/productsSlice';
 
-function ProductCard ({ id, src, title, description, price, addToCart, inCart }) {
+function ProductCard ({ src, title, description, price, addToCart, inCart }) {
 
     const dispatch = useDispatch();
 
@@ -23,9 +23,7 @@ function ProductCard ({ id, src, title, description, price, addToCart, inCart })
                 <div className={style["btn-area"]}>
                     <button 
                         className={style['shopping-cart-btn']}
-                        onClick={()=> {
-                            dispatch(toggleAddToCart({id: id, inCart: !inCart}))
-                        }}
+                        onClick={addToCart}
                     ></button>
                     <Button 
                         onClick={() => {console.log('Buy');}}

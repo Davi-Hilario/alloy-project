@@ -13,11 +13,14 @@ const cartSlice = createSlice({
                 image: action.payload.image
             };
             state.push(newCartItem);
-        } 
+        },
+        removeItemFromCart: (state, action) => {
+            return state.filter((product) => product.id !== action.payload.id);
+        },
     }
 
 });
 
-export const { addItemToCart } = cartSlice.actions;
+export const { addItemToCart, removeItemFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

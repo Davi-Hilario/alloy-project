@@ -18,7 +18,7 @@ const productsSlice = createSlice({
         toggleAddToCart: (state, action) => {
             const index = state.findIndex((product) => product.id === action.payload.id);
             state[index].inCart = action.payload.inCart;
-        }
+        },
     }
 
 });
