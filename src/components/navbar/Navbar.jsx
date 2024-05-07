@@ -18,6 +18,7 @@ function Navbar () {
 
     let login = () => {
         navigate("/login")
+        window.location.reload();
     };
 
     let leave = () => {
@@ -28,10 +29,12 @@ function Navbar () {
 
     let register = () => {
         navigate("/register")
+        window.location.reload();
     };
 
     let cartIcon = () => {
         navigate("/cart")
+        window.location.reload();
     };
 
     return (
