@@ -7,11 +7,13 @@ import ProductCard from '../../components/cards/productCard/ProductCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, removeItemFromCart } from '../../redux/slices/cartSlice';
 import { addAllProducts, toggleAddToCart } from '../../redux/slices/productsSlice';
+import { pickSelectedProduct } from '../../redux/slices/selectedProductSlice';
 
 function Home() {
 
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.products)
+  const allProducts = useSelector((state) => state.products);
+  const selectedProduct = useSelector((state) => state.selectProduct);
 
   let [searchValue, setSearchValue] = useState("");
   let [products, setProducts] = useState([]); 
@@ -98,6 +100,9 @@ function Home() {
 
                   }}
                   inCart={data.inCart}
+                  selectProduct={() => {
+                    dispatch(pickSelectedProduct(data));
+                  }}
               />
           </div>
         ))}

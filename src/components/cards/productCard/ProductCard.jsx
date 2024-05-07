@@ -3,8 +3,9 @@ import Button from '../../buttons/Buttons';
 import doesTokenExists from '../../../validateAuthentication';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-function ProductCard ({ src, title, description, price, addToCart, inCart }) {
+function ProductCard ({ src, title, description, price, addToCart, inCart, selectProduct }) {
 
     let [isLogged, setLogged] = useState(false);
     const navigate = useNavigate();
@@ -45,7 +46,10 @@ function ProductCard ({ src, title, description, price, addToCart, inCart }) {
                         />
                     }
                     <Button 
-                        onClick={() => {console.log('Buy');}}
+                        onClick={() => {
+                            selectProduct()
+                            navigate("/product")
+                        }}
                         value="See more"
                     />
             </div>

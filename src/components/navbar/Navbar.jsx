@@ -24,17 +24,14 @@ function Navbar () {
     let leave = () => {
         sessionStorage.clear();
         alert("Bye ;)")
-        window.location.reload();
     };
 
     let register = () => {
         navigate("/register")
-        window.location.reload();
     };
 
     let cartIcon = () => {
         navigate("/cart")
-        window.location.reload();
     };
 
     return (
