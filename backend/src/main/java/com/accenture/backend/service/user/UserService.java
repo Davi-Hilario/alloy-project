@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.accenture.backend.model.exception.ConflictException;
-import com.accenture.backend.model.exception.UnauthorizedException;
+import com.accenture.backend.model.error.ConflictException;
+import com.accenture.backend.model.error.UnauthorizedException;
 import com.accenture.backend.model.user.Users;
 import com.accenture.backend.model.user.repository.UserRepository;
 

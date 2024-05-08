@@ -1,0 +1,20 @@
+insert into Product (id, price, image, name, description) values (default, 49.99, 'https://loremflickr.com/640/480/cats', 'Compact travel backpack with hidden compartments',  'Ideal for frequent travelers who need organization.');
+insert into Product (id, price, image, name, description) values (default, 29.99, 'https://loremflickr.com/640/481/cats', 'Premium leather wallet with RFID protection',  'Keep your cards and personal information secure.');
+insert into Product (id, price, image, name, description) values (default, 34.99, 'https://loremflickr.com/640/482/cats', 'Wireless ergonomic mouse with customizable buttons', 'Enhance productivity with this comfortable mouse.');
+insert into Product (id, price, image, name, description) values (default, 79.99, 'https://loremflickr.com/640/483/cats', 'Classic analog wristwatch with leather strap', 'Timeless design suitable for any occasion.');
+insert into Product (id, price, image, name, description) values (default, 12.99, 'https://loremflickr.com/640/484/cats', 'Reusable silicone food storage bags (set of 3)', 'Eco-friendly alternative to disposable plastic bags.');
+insert into Product (id, price, image, name, description) values (default, 24.99, 'https://loremflickr.com/640/485/cats', 'Stainless steel French press coffee maker', 'Brew rich and flavorful coffee at home.');
+insert into Product (id, price, image, name, description) values (default, 19.99, 'https://loremflickr.com/640/486/cats', 'Soft microfiber bath towels (pack of 4)',  'Quick-drying and absorbent towels for your bathroom.');
+insert into Product (id, price, image, name, description) values (default, 149.99, 'https://loremflickr.com/640/487/cats', 'Adjustable standing desk converter',  'Easily switch between sitting and standing while working.');
+insert into Product (id, price, image, name, description) values (default, 8.99, 'https://loremflickr.com/640/488/cats', 'Set of colorful gel pens for creative writing', 'Express your thoughts with vibrant ink colors.');
+insert into Product (id, price, image, name, description) values (default, 39.99, 'https://loremflickr.com/640/489/cats', 'Bluetooth-enabled smart water bottle',  'Reminds you to stay hydrated throughout the day.');
+insert into Product (id, price, image, name, description) values (default, 59.99, 'https://loremflickr.com/640/490/cats', 'Portable foldable solar charger for outdoor adventures', 'Charge your devices using solar power on the go.');
+insert into Product (id, price, image, name, description) values (default, 89.99, 'https://loremflickr.com/640/491/cats', 'Premium noise-canceling earbuds with touch controls', 'Immerse yourself in music without distractions.');
+insert into Product (id, price, image, name, description) values (default, 16.99, 'https://loremflickr.com/640/492/cats', 'Scented soy wax candles (set of 2)', 'Create a cozy ambiance with these delightful candles.');
+insert into Product (id, price, image, name, description) values (default, 9.99, 'https://loremflickr.com/640/493/cats', 'Collapsible silicone travel pet bowl',  'Convenient for feeding your furry friend during trips.');
+insert into Product (id, price, image, name, description) values (default, 12.99, 'https://loremflickr.com/640/494/cats', 'Sleek smartphone case with built-in wallet',  'A practical phone case that holds cards and cash.');
+insert into Product (id, price, image, name, description) values (default, 149.99, 'https://loremflickr.com/640/495/cats', 'Premium noise-canceling headphones',  'Immerse yourself in music with these high-quality headphones.');
+insert into Product (id, price, image, name, description) values (default, 24.99, 'https://loremflickr.com/640/496/cats', 'Organic cotton T-shirt with unique design',  'Comfortable and eco-friendly shirt for everyday wear.');
+insert into Product (id, price, image, name, description) values (default, 19.99, 'https://loremflickr.com/640/497/cats', 'Reusable stainless steel water bottle',  'Stay hydrated and reduce plastic waste with this durable bottle.');
+
+insert into Users (id, username, email, password) values (default, 'Administrator', 'admin@gmail.com', 'admin1234');

@@ -1,4 +1,4 @@
-package com.accenture.backend.model.exception;
+package com.accenture.backend.model.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

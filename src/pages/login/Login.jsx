@@ -20,8 +20,9 @@ function Login() {
             sessionStorage.NAME = response.data.name;
             sessionStorage.EMAIL = response.data.email;
             
-            alert("Login realizado com sucesso!")
-            // navigate("/");
+            alert("Logged succesfully!")
+            navigate("/");
+            
         }).catch(err => {
             alert("The provided email AND/OR password are incorrect!")
         })

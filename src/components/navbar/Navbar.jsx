@@ -23,7 +23,8 @@ function Navbar () {
 
     let leave = () => {
         sessionStorage.clear();
-        alert("Bye ;)")
+        setLogged(false);
+        alert("Bye ;)");
     };
 
     let register = () => {

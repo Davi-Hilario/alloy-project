@@ -36,6 +36,7 @@ function Home() {
   function findAllProducts() {
     api.get().then((response) => {
       const { data } = response;
+      console.log(data);
       setProducts(data);
     }).catch((error) => {
       console.warn("Error: " + error);
