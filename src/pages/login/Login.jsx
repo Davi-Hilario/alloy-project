@@ -12,14 +12,16 @@ function Login() {
     const navigate = useNavigate();
 
     function handleSubmit () {
-        api.get(null, {
-            params: {
-                email: loginValue,
-                password: passwordValue
-            }
+        api.post("/login", {
+            email: loginValue,
+            password: passwordValue
         }).then(response => {
             sessionStorage.TOKEN = new Date().toISOString();
-            navigate("/");
+            sessionStorage.NAME = response.data.name;
+            sessionStorage.EMAIL = response.data.email;
+            
+            alert("Login realizado com sucesso!")
+            // navigate("/");
         }).catch(err => {
             alert("The provided email AND/OR password are incorrect!")
         })

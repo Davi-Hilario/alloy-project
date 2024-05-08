@@ -9,23 +9,22 @@ function Register() {
 
     let [loginValue, setLoginValue] = useState("");
     let [passwordValue, setPasswordValue] = useState("");
-    let [confirmPasswordValue, setConfirmPasswordValue] = useState("");
+    let [nameValue, setNameValue] = useState("");
     const navigate = useNavigate();
 
     function handleSubmit () {
-        if (passwordValue !== confirmPasswordValue) {
-            console.warn("Password and Confirm Password are not identical!");
-        } else {
-            api.post(null, {
-                email: loginValue,
-                password: passwordValue
-            }).then(response => {
-                alert("Account Created!")
-                navigate("/login");
-            }).catch(err => {
-                alert("Unable to create the account: " + err)
-            })
-        }
+        api.post(null, {
+            name: nameValue,
+            email: loginValue,
+            password: passwordValue
+        }).then(response => {
+            console.log(response.data)
+            alert("Account Created!")
+            navigate("/login");
+        }).catch(err => {
+            alert("Unable to create the account: " + err)
+            console.log(err)
+        })
     }
 
     return (
@@ -41,6 +40,14 @@ function Register() {
                     subText="Already registered? "
                     subTextLink="Login in"
                     formInput={[
+                        <FormInput
+                            fieldName="Name"
+                            height="35%"
+                            placeholder="Your name here"
+                            onChange={(e) => {
+                                setNameValue(e.target.value)
+                            }}
+                        />,
                         <FormInput 
                             fieldName="Email"
                             height="35%"
@@ -57,14 +64,6 @@ function Register() {
                                 setPasswordValue(e.target.value)
                             }}
                         />,
-                        <FormInput
-                            fieldName="Confirm Password"
-                            height="35%"
-                            placeholder="Confirm your password"
-                            onChange={(e) => {
-                                setConfirmPasswordValue(e.target.value)
-                            }}
-                        />
                     ]}
                 />
             </div>
