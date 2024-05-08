@@ -52,7 +52,7 @@ function ProductCard ({ src, title, description, price, addToCart, inCart, selec
                         }}
                         value="See more"
                     />
-            </div>
+                </div>
             </div>
         </div>
     );

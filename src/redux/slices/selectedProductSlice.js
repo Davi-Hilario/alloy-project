@@ -13,7 +13,8 @@ const selectedProductSlice = createSlice({
                 image: action.payload.image,
                 inCart: true,
             };
-            state = newSelectedProduct;
+            state.pop();
+            state.push(newSelectedProduct);
         },
     }
 
