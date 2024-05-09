@@ -1,8 +1,8 @@
-import style from './Register.module.css';
+import api from '../../api/api';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { usersController as api } from '../../api/api';
+import style from './Register.module.css';
 import Form from '../../components/form/Form';
+import { useNavigate } from 'react-router-dom';
 import FormInput from '../../components/inputs/formInput/FormInput';
 
 function Register() {
@@ -13,7 +13,7 @@ function Register() {
     const navigate = useNavigate();
 
     function handleSubmit () {
-        api.post(null, {
+        api.post("/users", {
             name: nameValue,
             email: loginValue,
             password: passwordValue

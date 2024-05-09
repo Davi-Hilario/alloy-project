@@ -1,9 +1,8 @@
-import style from './ProductCard.module.css';
 import Button from '../../buttons/Buttons';
-import doesTokenExists from '../../../validateAuthentication';
 import { useState, useEffect } from 'react';
+import style from './ProductCard.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import doesTokenExists from '../../../validateAuthentication';
 
 function ProductCard ({ src, title, description, price, addToCart, inCart, selectProduct }) {
 

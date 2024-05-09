@@ -15,6 +15,9 @@ const productsSlice = createSlice({
             };
             state.push(newProduct);
         },
+        removeAllProducts: (state, action) => {
+            state.length = action.length;
+        },
         toggleAddToCart: (state, action) => {
             const index = state.findIndex((product) => product.id === action.payload.id);
             state[index].inCart = action.payload.inCart;
@@ -23,6 +26,6 @@ const productsSlice = createSlice({
 
 });
 
-export const { addAllProducts, toggleAddToCart } = productsSlice.actions;
+export const { addAllProducts, toggleAddToCart, removeAllProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;

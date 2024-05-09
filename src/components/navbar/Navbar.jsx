@@ -1,10 +1,9 @@
 import style from './Navbar.module.css';
 import Button from '../buttons/Buttons';
-
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import doesTokenExists from '../../validateAuthentication';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 function Navbar () {
 

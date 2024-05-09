@@ -1,63 +1,57 @@
+import api from '../../api/api';
 import style from './Home.module.css';
-import SearchBar from '../../components/searchbar/SearchBar';
-import Navbar from '../../components/navbar/Navbar';
-import { productsController as api } from '../../api/api';
 import { useState, useEffect } from 'react';
-import ProductCard from '../../components/cards/productCard/ProductCard';
+import Navbar from '../../components/navbar/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart, removeItemFromCart } from '../../redux/slices/cartSlice';
-import { addAllProducts, toggleAddToCart } from '../../redux/slices/productsSlice';
+import SearchBar from '../../components/searchbar/SearchBar';
+import ProductCard from '../../components/cards/productCard/ProductCard';
 import { pickSelectedProduct } from '../../redux/slices/selectedProductSlice';
+import { addItemToCart, removeItemFromCart } from '../../redux/slices/cartSlice';
+import { addAllProducts, toggleAddToCart, removeAllProducts } from '../../redux/slices/productsSlice';
 
 function Home() {
 
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
-  const selectedProduct = useSelector((state) => state.selectProduct);
-
+    
   let [searchValue, setSearchValue] = useState("");
-  let [products, setProducts] = useState([]); 
   let [foundProducts, setFoundProducts] = useState([]);
 
   useEffect(() => {
+    const findAllProducts = () => {
+      api.get("/products").then((response) => {
+        const { data } = response;
+        dispatch(removeAllProducts(data));
+        data.forEach(item => {
+          dispatch(addAllProducts(item));
+        })
+      }).catch((error) => {
+        console.warn("Error: " + error);
+      })
+    }
     findAllProducts();
   }, [])
 
   useEffect(() => {
-    products.forEach(product => {
-      dispatch(addAllProducts(product));
-    });
-  }, [products])
-
-  useEffect(() => {
-      searchProduct();
+    const searchProduct = () => {
+      if (searchValue !== "") {
+  
+        let searchResult = []
+  
+        for (var i = 0; i < allProducts.length; i++) {
+          if (allProducts[i].name.toUpperCase().includes(searchValue.toUpperCase())) {
+            searchResult.push(allProducts[i]);
+          }
+        }
+        setFoundProducts(searchResult);
+      } else {
+        setFoundProducts([]);
+      }
+    };
+    searchProduct();
   }, [searchValue, allProducts])
 
-  function findAllProducts() {
-    api.get().then((response) => {
-      const { data } = response;
-      console.log(data);
-      setProducts(data);
-    }).catch((error) => {
-      console.warn("Error: " + error);
-    })
-  }
-
-  function searchProduct(){
-    if (searchValue !== "") {
-
-      let searchResult = []
-
-      for (var i = 0; i < allProducts.length; i++) {
-        if (allProducts[i].name.toUpperCase().includes(searchValue.toUpperCase())) {
-          searchResult.push(allProducts[i]);
-        }
-      }
-      setFoundProducts(searchResult);
-    } else {
-      setFoundProducts([]);
-    }
-  };
+  
 
   return (
     <div className={style["App"]}>

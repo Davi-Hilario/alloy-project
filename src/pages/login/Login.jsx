@@ -1,8 +1,8 @@
-import style from './Login.module.css';
+import api from '../../api/api';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { usersController as api } from '../../api/api';
+import style from './Login.module.css';
 import Form from '../../components/form/Form';
+import { useNavigate } from 'react-router-dom';
 import FormInput from '../../components/inputs/formInput/FormInput';
 
 function Login() {
@@ -12,7 +12,7 @@ function Login() {
     const navigate = useNavigate();
 
     function handleSubmit () {
-        api.post("/login", {
+        api.post("/users/login", {
             email: loginValue,
             password: passwordValue
         }).then(response => {
