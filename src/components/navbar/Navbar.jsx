@@ -1,76 +1,66 @@
-import style from './Navbar.module.css';
-import Button from '../buttons/Buttons';
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import doesTokenExists from '../../validateAuthentication';
+import style from "./Navbar.module.css";
+import Button from "../buttons/Buttons";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import doesTokenExists from "../../validateAuthentication";
 
-function Navbar () {
+function Navbar() {
+	const navigate = useNavigate();
+	const cart = useSelector((state) => state.cart);
+	let [isLogged, setLogged] = useState(false);
 
-    const navigate = useNavigate();
-    const cart = useSelector((state) => state.cart);
-    let [isLogged, setLogged] = useState(false);
+	useEffect(() => {
+		setLogged(doesTokenExists());
+	}, []);
 
-    useEffect(() => {
-        setLogged(doesTokenExists());
-    }, [])
+	let login = () => {
+		navigate("/login");
+		window.location.reload();
+	};
 
-    let login = () => {
-        navigate("/login")
-        window.location.reload();
-    };
+	let leave = () => {
+		sessionStorage.clear();
+		setLogged(false);
+		alert("Bye ;)");
+	};
 
-    let leave = () => {
-        sessionStorage.clear();
-        setLogged(false);
-        alert("Bye ;)");
-    };
+	let register = () => {
+		navigate("/register");
+	};
 
-    let register = () => {
-        navigate("/register")
-    };
+	let cartIcon = () => {
+		navigate("/cart");
+	};
 
-    let cartIcon = () => {
-        navigate("/cart")
-    };
+	return (
+		<div className={style["navbar"]}>
+			<div className={style["container"]}>
+				<img alt='React icon' className={style["logo-icon"]} />
+				<div className={style["btn-area"]}>
+					{!isLogged && (
+						<>
+							<Button value={"Login"} onClick={login} />
+							<Button value={"Register"} onClick={register} />
+						</>
+					)}
+					{isLogged && (
+						<>
+							<div className={style["cart-button-area"]}>
+								<button
+									className={style["shopping-cart-btn"]}
+									onClick={cartIcon}
+								></button>
+								<span>{cart.length}</span>
+							</div>
 
-    return (
-        <div className={style["navbar"]}>
-            <div className={style["container"]}>
-                <img alt="React icon" className={style["logo-icon"]} />
-                <div className={style["btn-area"]}>
-                    {!isLogged && (
-                        <>
-                            <Button 
-                                value={"Login"}
-                                onClick={login}
-                            />
-                            <Button 
-                                value={"Register"}
-                                onClick={register}
-                            />
-                        </>
-                    )}
-                    {isLogged && (
-                        <>
-                            <div className={style['cart-button-area']}>
-                                <button 
-                                    className={style['shopping-cart-btn']} 
-                                    onClick={cartIcon}
-                                ></button> 
-                                <span>{cart.length}</span>
-                            </div>
-                            
-                            <Button 
-                                value={"Leave"}
-                                onClick={leave}
-                            />
-                        </>
-                    )}
-                </div>
-            </div>
-        </div>
-    );
+							<Button value={"Leave"} onClick={leave} />
+						</>
+					)}
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default Navbar;

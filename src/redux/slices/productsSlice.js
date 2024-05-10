@@ -1,31 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const productsSlice = createSlice({
-    name: "products",
-    initialState: [],
-    reducers: {
-        addAllProducts: (state, action) => {
-            const newProduct = {
-                id: action.payload.id,
-                name: action.payload.name,
-                price: action.payload.price,
-                description: action.payload.description,
-                image: action.payload.image,
-                inCart: false,
-            };
-            state.push(newProduct);
-        },
-        removeAllProducts: (state, action) => {
-            state.length = action.length;
-        },
-        toggleAddToCart: (state, action) => {
-            const index = state.findIndex((product) => product.id === action.payload.id);
-            state[index].inCart = action.payload.inCart;
-        },
-    }
-
+	name: "products",
+	initialState: [],
+	reducers: {
+		addAllProducts: (state, action) => {
+			const newProduct = {
+				id: action.payload.id,
+				name: action.payload.name,
+				price: action.payload.price,
+				description: action.payload.description,
+				image: action.payload.image,
+				inCart: false,
+			};
+			state.push(newProduct);
+		},
+		removeAllProducts: (state, action) => {
+			state.length = action.length;
+		},
+		toggleAddToCart: (state, action) => {
+			const index = state.findIndex(
+				(product) => product.id === action.payload.id
+			);
+			state[index].inCart = action.payload.inCart;
+		},
+	},
 });
 
-export const { addAllProducts, toggleAddToCart, removeAllProducts } = productsSlice.actions;
+export const { addAllProducts, toggleAddToCart, removeAllProducts } =
+	productsSlice.actions;
 
 export default productsSlice.reducer;

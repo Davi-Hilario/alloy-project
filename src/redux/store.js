@@ -6,20 +6,20 @@ import { persistReducer, persistStore } from "redux-persist";
 import selectedProductReducer from "./slices/selectedProductSlice";
 
 const rootReducer = combineReducers({
-    cart: cartReducer,
-    products: productReducer,
-    selectedProduct: selectedProductReducer,
+	cart: cartReducer,
+	products: productReducer,
+	selectedProduct: selectedProductReducer,
 });
 
 const persistConfig = {
-    key: 'root',
-    storage,
+	key: "root",
+	storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-    reducer: persistedReducer,
+	reducer: persistedReducer,
 });
 
 export const persistor = persistStore(store);

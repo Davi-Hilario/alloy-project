@@ -1,87 +1,93 @@
 .Cart {
-    width: 99vw;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+	width: 99vw;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .container {
-    display: flex;
-    width: 90%;
-    height: 100%;
-    flex-direction: column;
+	display: flex;
+	width: 90%;
+	height: 100%;
+	flex-direction: column;
 }
 
 .title-area {
-    width: 100%;
-    margin-bottom: 3rem;
+	width: 100%;
+	margin-bottom: 3rem;
 }
 
 .title-area h1 {
-    font-size: 50px;
+	font-size: 50px;
 }
 
 .message-area {
-    gap: 5%;
-    width: 100%;
-    height: 92vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+	gap: 5%;
+	width: 100%;
+	height: 92vh;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .message-area span {
-    font-size: 40px;
-    letter-spacing: 3px;
-    font-weight: 500;
+	font-size: 40px;
+	letter-spacing: 3px;
+	font-weight: 500;
 }
 
 .found-items-area {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: flex-start;
 }
-  
+
 .found-items-area::after {
-    content: '';
-    height: 2rem;
-    flex-basis: 100%;
+	content: "";
+	height: 2rem;
+	flex-basis: 100%;
 }
-  
+
 .found-items-area::before {
-    content: '';
-    height: 1rem;
-    flex-basis: 100%;
+	content: "";
+	height: 1rem;
+	flex-basis: 100%;
 }
-  
+
 .products-area {
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    justify-content: center;
-    margin: 0 0 3rem .4rem;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	justify-content: center;
+	margin: 0 0 3rem 0.4rem;
 }
 
 .line-items {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .cart-information {
-    width: 30%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: 40%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .button-area {
-    width: 18%;
-    display: flex;
-    justify-content: space-between;    
+	width: 18%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.information-section {
+	display: flex;
+	width: 50%;
+	gap: 5%;
 }
