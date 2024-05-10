@@ -11,12 +11,15 @@ const productsSlice = createSlice({
 				price: action.payload.price,
 				description: action.payload.description,
 				image: action.payload.image,
-				inCart: false,
+				inCart: action.payload.inCart,
+				isChecked: false,
 			};
 			state.push(newProduct);
 		},
 		removeAllProducts: (state, action) => {
-			state.length = action.length;
+			if (state.length != 0) {
+				state.length = action.length;
+			}
 		},
 		toggleAddToCart: (state, action) => {
 			const index = state.findIndex(
@@ -24,10 +27,54 @@ const productsSlice = createSlice({
 			);
 			state[index].inCart = action.payload.inCart;
 		},
+		addItemToCart: (state, action) => {
+			let index = state.findIndex(
+				(product) => product.id === action.payload.id
+			);
+			state[index].inCart = true;
+		},
+		toggleCheckedButton: (state, action) => {
+			console.log("pressed");
+			state.forEach((product) => {
+				if (action.payload.id === product.id) {
+					product.isChecked = !product.isChecked;
+					return;
+				}
+			});
+		},
+		activateAllCheckedButton: (state, action) => {
+			let filteredList = state.filter((product) => product.isChecked);
+			if (filteredList.length >= 0 && filteredList.length !== state.length) {
+				state.forEach((product) => (product.isChecked = true));
+			} else if (filteredList.length === state.length) {
+				state.forEach((product) => (product.isChecked = false));
+			}
+		},
+		removeItemFromCart: (state, action) => {
+			let index = state.findIndex(
+				(product) => product.id === action.payload.id
+			);
+			state[index].inCart = false;
+		},
+		removeCheckedItemsFromCart: (state, action) => {
+			let checkedItems = state.filter((product) => product.isChecked);
+			checkedItems.forEach((item) => {
+				let index = state.findIndex((product) => product.id === item.id);
+				state[index].inCart = false;
+			});
+		},
 	},
 });
 
-export const { addAllProducts, toggleAddToCart, removeAllProducts } =
-	productsSlice.actions;
+export const {
+	addAllProducts,
+	toggleAddToCart,
+	removeAllProducts,
+	addItemToCart,
+	toggleCheckedButton,
+	activateAllCheckedButton,
+	removeItemFromCart,
+	removeCheckedItemsFromCart,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

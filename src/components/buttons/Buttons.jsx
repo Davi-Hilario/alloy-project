@@ -1,18 +1,27 @@
 import style from "./Button.module.css";
 
-function Button(props) {
+function Button({
+	onClick,
+	width,
+	height,
+	fontSize,
+	backgroundColor,
+	disabled,
+	value,
+}) {
 	return (
 		<button
 			className={style["btn"]}
-			onClick={props.onClick}
+			onClick={onClick}
 			style={{
-				width: props.width,
-				height: props.height,
-				fontSize: props.fontSize,
-				backgroundColor: props.backgroundColor,
+				width: width,
+				height: height,
+				fontSize: fontSize,
+				backgroundColor: disabled ? "gray" : backgroundColor,
 			}}
+			disabled={disabled}
 		>
-			{props.value}
+			{value}
 		</button>
 	);
 }

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import style from "./Product.module.css";
 import { useSelector } from "react-redux";
 import Navbar from "../../components/navbar/Navbar";
@@ -6,10 +5,6 @@ import Button from "../../components/buttons/Buttons";
 
 function Product() {
 	const selectedProduct = useSelector((state) => state.selectedProduct);
-
-	useEffect(() => {
-		console.log(selectedProduct);
-	}, []);
 
 	return (
 		<div className={style["Product"]}>

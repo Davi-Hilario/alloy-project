@@ -7,14 +7,13 @@ import SearchBar from "../../components/searchbar/SearchBar";
 import ProductCard from "../../components/cards/productCard/ProductCard";
 import { pickSelectedProduct } from "../../redux/slices/selectedProductSlice";
 import {
-	addItemToCart,
-	removeItemFromCart,
-} from "../../redux/slices/cartSlice";
-import {
 	addAllProducts,
 	toggleAddToCart,
 	removeAllProducts,
+	addItemToCart,
+	removeItemFromCart,
 } from "../../redux/slices/productsSlice";
+import { all } from "axios";
 
 function Home() {
 	const dispatch = useDispatch();
@@ -30,6 +29,7 @@ function Home() {
 				.then((response) => {
 					const { data } = response;
 					dispatch(removeAllProducts(data));
+					console.log(allProducts);
 					data.forEach((item) => {
 						dispatch(addAllProducts(item));
 					});
@@ -64,57 +64,60 @@ function Home() {
 	}, [searchValue, allProducts]);
 
 	return (
-		<div className={style["App"]}>
+		<div className={style["Home"]}>
 			<Navbar />
-			<main>
-				<div className={style["banner"]}>
-					<div className={style["container"]}>
-						<div className={style["banner-content"]}>
-							<h1>ALLOY</h1>
-							<p>
-								Delivering high quality and trustful products to our clients
-								since 2024
-							</p>
-							<SearchBar
-								height='15%'
-								width='40%'
-								onChange={(e) => setSearchValue(e.target.value)}
-							/>
-						</div>
-					</div>
-				</div>
-			</main>
-			{foundProducts.length !== 0 && (
-				<div className={style["found-items-area"]}>
-					{foundProducts &&
-						foundProducts.map((data, index) => (
-							<div key={index} className={style["products-area"]}>
-								<ProductCard
-									id={data.id}
-									title={data.name}
-									description={data.description}
-									price={data.price}
-									src={data.image}
-									addToCart={() => {
-										dispatch(
-											toggleAddToCart({ id: data.id, inCart: !data.inCart })
-										);
-
-										if (!data.inCart) {
-											dispatch(addItemToCart(data));
-										} else {
-											dispatch(removeItemFromCart({ id: data.id }));
-										}
-									}}
-									inCart={data.inCart}
-									selectProduct={() => {
-										dispatch(pickSelectedProduct(data));
-									}}
+			<div className={style["container"]}>
+				<main>
+					<div className={style["banner"]}>
+						<div className={style["container"]}>
+							<div className={style["banner-content"]}>
+								<h1>ALLOY</h1>
+								<p>
+									Delivering high quality and trustful products to our clients
+									since 2024
+								</p>
+								<SearchBar
+									height='15%'
+									width='40%'
+									onChange={(e) => setSearchValue(e.target.value)}
 								/>
 							</div>
-						))}
-				</div>
-			)}
+						</div>
+					</div>
+				</main>
+				<div className={style["line"]}></div>
+				{foundProducts.length !== 0 && (
+					<div className={style["found-items-area"]}>
+						{foundProducts &&
+							foundProducts.map((data, index) => (
+								<div key={index} className={style["products-area"]}>
+									<ProductCard
+										id={data.id}
+										title={data.name}
+										description={data.description}
+										price={data.price}
+										src={data.image}
+										addToCart={() => {
+											dispatch(
+												toggleAddToCart({ id: data.id, inCart: !data.inCart })
+											);
+
+											if (!data.inCart) {
+												dispatch(addItemToCart(data));
+											} else {
+												dispatch(removeItemFromCart({ id: data.id }));
+											}
+										}}
+										inCart={data.inCart}
+										selectProduct={() => {
+											dispatch(pickSelectedProduct(data));
+										}}
+									/>
+								</div>
+							))}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }

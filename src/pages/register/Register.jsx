@@ -19,7 +19,6 @@ function Register() {
 				password: passwordValue,
 			})
 			.then((response) => {
-				console.log(response.data);
 				alert("Account Created!");
 				navigate("/login");
 			})

@@ -5,17 +5,21 @@ import Navbar from "../../components/navbar/Navbar";
 import Button from "../../components/buttons/Buttons";
 import { useDispatch, useSelector } from "react-redux";
 import doesTokenExists from "../../validateAuthentication";
-import { removeItemFromCart } from "../../redux/slices/cartSlice";
-import { toggleAddToCart } from "../../redux/slices/productsSlice";
+import {
+	removeCheckedItemsFromCart,
+	toggleCheckedButton,
+	activateAllCheckedButton,
+} from "../../redux/slices/productsSlice";
 import CartItemCard from "../../components/cards/cartItemsCard/CartItemCard";
-import { pickSelectedProduct } from "../../redux/slices/selectedProductSlice";
 
 function Cart() {
 	const dispatch = useDispatch();
-	const cartItems = useSelector((state) => state.cart);
+	const allProducts = useSelector((state) => state.products);
 
 	let [isLogged, setLogged] = useState(false);
 	let [totalValue, setTotalValue] = useState(0);
+	let [isItemsChecked, setIsItemsChecked] = useState(false);
+	let [cartItems, setCartItems] = useState([]);
 
 	const navigate = useNavigate();
 
@@ -25,17 +29,26 @@ function Cart() {
 	}, []);
 
 	useEffect(() => {
+		let foundItems = allProducts.filter((item) => item.inCart);
+		setCartItems(foundItems);
+	}, [allProducts]);
+
+	useEffect(() => {
 		setTotalValue(getTotalValue());
+		setIsItemsChecked(isAnyItemChecked());
 	}, [cartItems]);
 
 	function getTotalValue() {
 		let total = 0;
 		cartItems.forEach((element) => {
 			total += element.price;
-			console.log(total);
 		});
-		console.log(total);
 		return total;
+	}
+
+	function isAnyItemChecked() {
+		let checkedItems = cartItems.filter((item) => item.isChecked);
+		return checkedItems.length !== 0;
 	}
 
 	function sendToLoginPage() {
@@ -61,11 +74,22 @@ function Cart() {
 							</div>
 						</div>
 						<div className={style["button-area"]}>
+							<Button
+								value='Select All'
+								onClick={() => dispatch(activateAllCheckedButton())}
+							/>
 							<Button value='Checkout' />
-							<Button value='Clear cart' backgroundColor='red' />
+							<Button
+								value='Remove from Cart'
+								width='40%'
+								backgroundColor='red'
+								disabled={!isItemsChecked}
+								onClick={() => dispatch(removeCheckedItemsFromCart())}
+							/>
 						</div>
 					</div>
 				</div>
+				<div className={style["line"]}></div>
 				{cartItems.length === 0 && (
 					<div className={style["message-area"]}>
 						<span>Your cart has no products yet!</span>
@@ -88,14 +112,10 @@ function Cart() {
 										description={data.description}
 										price={data.price}
 										src={data.image}
-										addToCart={() => {
-											dispatch(
-												toggleAddToCart({ id: data.id, inCart: !data.inCart })
-											);
-											dispatch(removeItemFromCart({ id: data.id }));
+										isChecked={data.isChecked}
+										onClick={() => {
+											dispatch(toggleCheckedButton({ id: data.id }));
 										}}
-										inCart={data.inCart}
-										selectProduct={() => dispatch(pickSelectedProduct(data))}
 									/>
 								</div>
 							))}

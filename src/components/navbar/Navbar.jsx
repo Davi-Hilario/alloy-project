@@ -7,12 +7,19 @@ import doesTokenExists from "../../validateAuthentication";
 
 function Navbar() {
 	const navigate = useNavigate();
-	const cart = useSelector((state) => state.cart);
+	const allProducts = useSelector((state) => state.products);
+
+	let [cart, setCartItems] = useState([]);
 	let [isLogged, setLogged] = useState(false);
 
 	useEffect(() => {
 		setLogged(doesTokenExists());
 	}, []);
+
+	useEffect(() => {
+		let foundItems = allProducts.filter((item) => item.inCart);
+		setCartItems(foundItems);
+	}, [allProducts]);
 
 	let login = () => {
 		navigate("/login");
