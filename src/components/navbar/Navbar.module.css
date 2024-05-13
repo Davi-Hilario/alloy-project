@@ -1,6 +1,8 @@
-.logo-icon {
+.logo {
 	width: 8%;
-	height: auto;
+	font-size: 24px;
+	letter-spacing: 3px;
+	cursor: pointer;
 }
 
 .navbar {

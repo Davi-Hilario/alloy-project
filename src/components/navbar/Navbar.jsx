@@ -40,10 +40,16 @@ function Navbar() {
 		navigate("/cart");
 	};
 
+	let home = () => {
+		navigate("/");
+	};
+
 	return (
 		<div className={style["navbar"]}>
 			<div className={style["container"]}>
-				<img alt='React icon' className={style["logo-icon"]} />
+				<span className={style["logo"]} onClick={home}>
+					Alloy
+				</span>
 				<div className={style["btn-area"]}>
 					{!isLogged && (
 						<>
