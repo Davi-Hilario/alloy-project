@@ -21,40 +21,20 @@ function Navbar() {
 		setCartItems(foundItems);
 	}, [allProducts]);
 
-	let login = () => {
-		navigate("/login");
-		window.location.reload();
-	};
-
-	let leave = () => {
-		sessionStorage.clear();
-		setLogged(false);
-		alert("Bye ;)");
-	};
-
-	let register = () => {
-		navigate("/register");
-	};
-
-	let cartIcon = () => {
-		navigate("/cart");
-	};
-
-	let home = () => {
-		navigate("/");
-	};
-
 	return (
 		<div className={style["navbar"]}>
 			<div className={style["container"]}>
-				<span className={style["logo"]} onClick={home}>
+				<span className={style["logo"]} onClick={() => navigate("/")}>
 					Alloy
 				</span>
 				<div className={style["btn-area"]}>
 					{!isLogged && (
 						<>
-							<Button value={"Login"} onClick={login} />
-							<Button value={"Register"} onClick={register} />
+							<Button value={"Login"} onClick={() => navigate("/login")} />
+							<Button
+								value={"Register"}
+								onClick={() => navigate("/register")}
+							/>
 						</>
 					)}
 					{isLogged && (
@@ -62,12 +42,20 @@ function Navbar() {
 							<div className={style["cart-button-area"]}>
 								<button
 									className={style["shopping-cart-btn"]}
-									onClick={cartIcon}
+									onClick={() => navigate("/cart")}
 								></button>
 								<span>{cart.length}</span>
 							</div>
 
-							<Button value={"Leave"} onClick={leave} />
+							<Button
+								value={"Leave"}
+								onClick={() => {
+									sessionStorage.clear();
+									setLogged(false);
+									alert("Bye ;)");
+									window.location.reload();
+								}}
+							/>
 						</>
 					)}
 				</div>
