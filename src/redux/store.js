@@ -1,4 +1,3 @@
-import cartReducer from "./slices/cartSlice";
 import storage from "redux-persist/lib/storage";
 import productReducer from "./slices/productsSlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
@@ -15,7 +14,6 @@ import {
 import selectedProductReducer from "./slices/selectedProductSlice";
 
 const rootReducer = combineReducers({
-	cart: cartReducer,
 	products: productReducer,
 	selectedProduct: selectedProductReducer,
 });

@@ -43,6 +43,12 @@ public class UserController {
         return ResponseEntity.ok(UserMapper.toDto(foundUser));
     }
 
+    @PostMapping("/login-admin")
+    public ResponseEntity<UserConsultingDto> loginAdmin(@RequestBody @Valid UserLoginDto credentials) {
+        Users foundUser = userService.loginAdmin(UserMapper.toEntity(credentials));
+        return ResponseEntity.ok(UserMapper.toDto(foundUser));
+    }
+
     @GetMapping
     public ResponseEntity<List<UserConsultingDto>> listAllUsers() {
         List<Users> foundUsers = userService.listAllUsers();

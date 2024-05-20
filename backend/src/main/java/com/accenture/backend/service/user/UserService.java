@@ -32,6 +32,14 @@ public class UserService {
                                 " | Password: " + credentials.getPassword()));
     }
 
+    public Users loginAdmin(Users credentials) {
+        return userRepository
+                .findByEmailAndPasswordAndRole(credentials.getEmail(), credentials.getPassword(), (short) 1)
+                .orElseThrow(() -> new UnauthorizedException(
+                        "Email: " + credentials.getEmail() +
+                                " | Password: " + credentials.getPassword()));
+    }
+
     public List<Users> listAllUsers() {
         return userRepository.findAll();
     }

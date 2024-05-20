@@ -9,6 +9,8 @@ public class UserMapper {
     public static Users toEntity(UserCreationDto dto) {
         Users entity = new Users();
         entity.setUsername(dto.getName());
+        entity.setImage(dto.getImage());
+        entity.setRole(dto.getRole());
         entity.setEmail(dto.getEmail());
         entity.setPassword(dto.getPassword());
         return entity;
@@ -25,6 +27,8 @@ public class UserMapper {
         UserConsultingDto dto = new UserConsultingDto();
         dto.setId(entity.getId());
         dto.setName(entity.getUsername());
+        dto.setImage(entity.getImage());
+        dto.setRole(entity.getRole());
         dto.setEmail(entity.getEmail());
         dto.setPassword(entity.getPassword());
         return dto;

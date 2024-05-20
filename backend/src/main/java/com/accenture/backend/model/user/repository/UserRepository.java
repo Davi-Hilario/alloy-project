@@ -11,6 +11,7 @@ import com.accenture.backend.model.user.Users;
 public interface UserRepository extends JpaRepository<Users, Integer> {
 
     Optional<Users> findByEmailAndPassword(String email, String password);
+    Optional<Users> findByEmailAndPasswordAndRole(String email, String password, Short role);
 
     boolean existsByEmailOrPassword(String email, String password);
 
