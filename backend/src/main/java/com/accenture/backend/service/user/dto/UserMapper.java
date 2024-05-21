@@ -23,6 +23,14 @@ public class UserMapper {
         return entity;
     }
 
+    public static Users toEntity(UserLoginByRoleDto dto) {
+        Users entity = new Users();
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(dto.getPassword());
+        entity.setRole(dto.getRole());
+        return entity;
+    }
+
     public static UserConsultingDto toDto(Users entity) {
         UserConsultingDto dto = new UserConsultingDto();
         dto.setId(entity.getId());

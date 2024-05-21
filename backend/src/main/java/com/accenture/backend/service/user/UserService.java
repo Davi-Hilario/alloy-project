@@ -32,9 +32,9 @@ public class UserService {
                                 " | Password: " + credentials.getPassword()));
     }
 
-    public Users loginAdmin(Users credentials) {
+    public Users loginByAccountRole(Users credentials) {
         return userRepository
-                .findByEmailAndPasswordAndRole(credentials.getEmail(), credentials.getPassword(), (short) 1)
+                .findByEmailAndPasswordAndRole(credentials.getEmail(), credentials.getPassword(), credentials.getRole())
                 .orElseThrow(() -> new UnauthorizedException(
                         "Email: " + credentials.getEmail() +
                                 " | Password: " + credentials.getPassword()));

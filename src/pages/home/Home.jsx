@@ -28,11 +28,11 @@ function Home() {
 				.get("/products")
 				.then((response) => {
 					const { data } = response;
-					dispatch(removeAllProducts(data));
 					console.log(allProducts);
 					data.forEach((item) => {
 						dispatch(addAllProducts(item));
 					});
+					dispatch(removeAllProducts(data));
 				})
 				.catch((error) => {
 					console.warn("Error: " + error);

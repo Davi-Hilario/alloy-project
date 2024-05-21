@@ -15,8 +15,9 @@ import com.accenture.backend.model.user.Users;
 import com.accenture.backend.service.user.UserService;
 import com.accenture.backend.service.user.dto.UserConsultingDto;
 import com.accenture.backend.service.user.dto.UserCreationDto;
+import com.accenture.backend.service.user.dto.UserLoginByRoleDto;
 import com.accenture.backend.service.user.dto.UserLoginDto;
-import com.accenture.backend.service.user.dto.UserMapper;
+import static com.accenture.backend.service.user.dto.UserMapper.*;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,22 +32,22 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserConsultingDto> createNewUser(@RequestBody @Valid UserCreationDto newUser) {
-        Users createdUser = userService.createUser(UserMapper.toEntity(newUser));
+        Users createdUser = userService.createUser(toEntity(newUser));
         return ResponseEntity
                 .created(URI.create("/users/" + createdUser.getId()))
-                .body(UserMapper.toDto(createdUser));
+                .body(toDto(createdUser));
     }
 
     @PostMapping("/login")
     public ResponseEntity<UserConsultingDto> login(@RequestBody @Valid UserLoginDto credentials) {
-        Users foundUser = userService.login(UserMapper.toEntity(credentials));
-        return ResponseEntity.ok(UserMapper.toDto(foundUser));
+        Users foundUser = userService.login(toEntity(credentials));
+        return ResponseEntity.ok(toDto(foundUser));
     }
 
-    @PostMapping("/login-admin")
-    public ResponseEntity<UserConsultingDto> loginAdmin(@RequestBody @Valid UserLoginDto credentials) {
-        Users foundUser = userService.loginAdmin(UserMapper.toEntity(credentials));
-        return ResponseEntity.ok(UserMapper.toDto(foundUser));
+    @PostMapping("/login-by-role")
+    public ResponseEntity<UserConsultingDto> loginByAccountRole(@RequestBody @Valid UserLoginByRoleDto credentials) {
+        Users foundUser = userService.loginByAccountRole(toEntity(credentials));
+        return ResponseEntity.ok(toDto(foundUser));
     }
 
     @GetMapping
@@ -55,6 +56,6 @@ public class UserController {
         if (foundUsers.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(UserMapper.toDto(foundUsers));
+        return ResponseEntity.ok(toDto(foundUsers));
     }
 }
