@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.accenture.backend.model.error.ConflictException;
+import com.accenture.backend.model.error.NotFoundException;
 import com.accenture.backend.model.error.UnauthorizedException;
 import com.accenture.backend.model.user.Users;
 import com.accenture.backend.model.user.repository.UserRepository;
@@ -42,6 +43,27 @@ public class UserService {
 
     public List<Users> listAllUsers() {
         return userRepository.findAll();
+    }
+
+    public Users findUserById(Integer id) {
+        return userRepository
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException("User " + id));
+    }
+
+    public Users updateUserById(Integer id, Users updatedUser) {
+        if (!userRepository.existsById(id)) {
+            throw new NotFoundException("User " + id);
+        }
+        updatedUser.setId(id);
+        return userRepository.save(updatedUser);
+    }
+
+    public void deleteUserById(Integer id) {
+        if (!userRepository.existsById(id)) {
+            throw new NotFoundException("User " + id);
+        }
+        userRepository.deleteById(id);
     }
 
 }
