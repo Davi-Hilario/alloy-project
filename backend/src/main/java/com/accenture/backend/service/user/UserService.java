@@ -59,6 +59,12 @@ public class UserService {
         return userRepository.save(updatedUser);
     }
 
+    public Users changeUserImageById(Integer id, String newImage) {
+        Users foundUser = findUserById(id);
+        foundUser.setImage(newImage);
+        return userRepository.save(foundUser);
+    }
+
     public void deleteUserById(Integer id) {
         if (!userRepository.existsById(id)) {
             throw new NotFoundException("User " + id);
